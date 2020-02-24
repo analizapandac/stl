@@ -1,0 +1,19 @@
+service: payments-processor
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: ap-southeast-1
+
+plugins:
+  - serverless-offline
+  
+functions:
+  payments:
+    handler: handler.processPayment
+    events:
+      - http:
+          path: payments/process
+          method: post
+          cors: true
